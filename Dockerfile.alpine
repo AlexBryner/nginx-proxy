@@ -1,5 +1,5 @@
 FROM nginx:1.17.5-alpine
-LABEL maintainer="Jason Wilder mail@jasonwilder.com"
+LABEL maintainer="Alex Bryner abryner@doterra.com"
 
 # Install wget and install/updates certificates
 RUN apk add --no-cache --virtual .run-deps \

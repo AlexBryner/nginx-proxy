@@ -100,6 +100,12 @@ map $scheme $proxy_x_forwarded_ssl {
   https on;
 }
 
+# Set the proxy pass url
+map $http_liveagent-address $liveagent-address {
+    default "https://${http_liveagent-address}.salesforceliveagent.com/";
+    '' https://d.la2-c1cs-ord.salesforceliveagent.com/;
+}
+
 gzip_types text/plain text/css application/javascript application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
 
 log_format vhost '$host $remote_addr - $remote_user [$time_local] '
@@ -293,16 +299,18 @@ server {
 	{{ end }}
 
 	location / {
-		{{ if eq $proto "uwsgi" }}
-		include uwsgi_params;
-		uwsgi_pass {{ trim $proto }}://{{ trim $upstream_name }};
-		{{ else if eq $proto "fastcgi" }}
-		root   {{ trim $vhost_root }};
-		include fastcgi_params;
-		fastcgi_pass {{ trim $upstream_name }};
-		{{ else }}
-		proxy_pass {{ trim $proto }}://{{ trim $upstream_name }};
-		{{ end }}
+		# {{ if eq $proto "uwsgi" }}
+		# include uwsgi_params;
+		# uwsgi_pass {{ trim $proto }}://{{ trim $upstream_name }};
+		# {{ else if eq $proto "fastcgi" }}
+		# root   {{ trim $vhost_root }};
+		# include fastcgi_params;
+		# fastcgi_pass {{ trim $upstream_name }};
+		# {{ else }}
+		# proxy_pass {{ trim $proto }}://{{ trim $upstream_name }};
+		# {{ end }}
+
+        proxy_pass $liveagent-address
 
 		{{ if (exists (printf "/etc/nginx/htpasswd/%s" $host)) }}
 		auth_basic	"Restricted {{ $host }}";
@@ -340,16 +348,19 @@ server {
 	{{ end }}
 
 	location / {
-		{{ if eq $proto "uwsgi" }}
-		include uwsgi_params;
-		uwsgi_pass {{ trim $proto }}://{{ trim $upstream_name }};
-		{{ else if eq $proto "fastcgi" }}
-		root   {{ trim $vhost_root }};
-		include fastcgi_params;
-		fastcgi_pass {{ trim $upstream_name }};
-		{{ else }}
-		proxy_pass {{ trim $proto }}://{{ trim $upstream_name }};
-		{{ end }}
+		# {{ if eq $proto "uwsgi" }}
+		# include uwsgi_params;
+		# uwsgi_pass {{ trim $proto }}://{{ trim $upstream_name }};
+		# {{ else if eq $proto "fastcgi" }}
+		# root   {{ trim $vhost_root }};
+		# include fastcgi_params;
+		# fastcgi_pass {{ trim $upstream_name }};
+		# {{ else }}
+		# proxy_pass {{ trim $proto }}://{{ trim $upstream_name }};
+		# {{ end }}
+
+        proxy_pass $liveagent-address
+
 		{{ if (exists (printf "/etc/nginx/htpasswd/%s" $host)) }}
 		auth_basic	"Restricted {{ $host }}";
 		auth_basic_user_file	{{ (printf "/etc/nginx/htpasswd/%s" $host) }};
