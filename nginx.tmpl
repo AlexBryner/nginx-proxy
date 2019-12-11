@@ -101,7 +101,7 @@ map $scheme $proxy_x_forwarded_ssl {
 }
 
 # Set the proxy pass url
-map $http_liveagent-address $liveagentaddress {
+map $http_liveagentaddress $liveagentaddress {
     default "https://${http_liveagent-address}.salesforceliveagent.com/";
     '' https://d.la2-c1cs-ord.salesforceliveagent.com/;
 }
