@@ -156,6 +156,9 @@ server {
     add_header          "Access-Control-Allow-Origin" "*";
 
 	location / {
+        if ($request_method = "OPTIONS") {
+            return 204;
+        }
         proxy_pass $liveagentaddress;
 	}
 }
@@ -180,6 +183,9 @@ server {
     add_header          "Access-Control-Allow-Origin" "*";
 
 	location / {
+        if ($request_method = "OPTIONS") {
+            return 204;
+        }
         proxy_pass $liveagentaddress;
 	}
 }
@@ -275,6 +281,9 @@ server {
     add_header          "Access-Control-Allow-Origin" "*";
 
 	location / {
+        if ($request_method = "OPTIONS") {
+            return 204;
+        }
         proxy_pass $liveagentaddress;
 	}
 }
@@ -329,6 +338,9 @@ server {
     add_header          "Access-Control-Allow-Origin" "*";
 
 	location / {
+        if ($request_method = "OPTIONS") {
+            return 204;
+        }
         proxy_pass $liveagentaddress;
 	}
 }
@@ -362,6 +374,9 @@ server {
     add_header          "Access-Control-Allow-Origin" "*";
 
 	location / {
+        if ($request_method = "OPTIONS") {
+            return 204;
+        }
         proxy_pass $liveagentaddress;
 	}
 }
@@ -384,6 +399,9 @@ server {
     add_header          "Access-Control-Allow-Origin" "*";
 
 	location / {
+        if ($request_method = "OPTIONS") {
+            return 204;
+        }
         proxy_pass $liveagentaddress;
 	}
 }
