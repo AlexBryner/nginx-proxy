@@ -150,6 +150,11 @@ server {
 	{{ end }}
 	access_log /var/log/nginx/access.log vhost;
 
+    add_header          X-Content-Type-Options nosniff;
+    add_header          X-Frame-Options SAMEORIGIN;
+    add_header          X-XSS-Protection "1; mode=block";
+    add_header          "Access-Control-Allow-Origin" "*";
+
 	location / {
         proxy_pass $liveagentaddress;
 	}
@@ -169,6 +174,10 @@ server {
 	ssl_certificate /etc/nginx/certs/default.crt;
 	ssl_certificate_key /etc/nginx/certs/default.key;
 
+    add_header          X-Content-Type-Options nosniff;
+    add_header          X-Frame-Options SAMEORIGIN;
+    add_header          X-XSS-Protection "1; mode=block";
+    add_header          "Access-Control-Allow-Origin" "*";
 
 	location / {
         proxy_pass $liveagentaddress;
@@ -312,11 +321,6 @@ server {
 	{{ else if (exists "/etc/nginx/vhost.d/default") }}
 	include /etc/nginx/vhost.d/default;
 	{{ end }}
-
-    add_header          X-Content-Type-Options nosniff;
-    add_header          X-Frame-Options SAMEORIGIN;
-    add_header          X-XSS-Protection "1; mode=block";
-    add_header          "Access-Control-Allow-Origin" "*";
 
 	location / {
         proxy_pass $liveagentaddress;
