@@ -156,12 +156,6 @@ server {
 	{{ end }}
 	access_log /var/log/nginx/access.log vhost;
 
-    add_header          X-Content-Type-Options nosniff;
-    add_header          X-Frame-Options SAMEORIGIN;
-    add_header          X-XSS-Protection "1; mode=block";
-    add_header          "Access-Control-Allow-Origin" "*";
-    add_header          "Access-Control-Allow-Headers" "*,X-LIVEAGENT-API-VERSION,X-LIVEAGENT-AFFINITY,X-LIVEAGENT-SESSION-KEY,X-LIVEAGENT-SEQUENCE,liveagentaddress";
-
 	location / {
         if ($request_method = "OPTIONS") {
             return 204;
@@ -183,12 +177,6 @@ server {
 	ssl_session_tickets off;
 	ssl_certificate /etc/nginx/certs/default.crt;
 	ssl_certificate_key /etc/nginx/certs/default.key;
-
-    add_header          X-Content-Type-Options nosniff;
-    add_header          X-Frame-Options SAMEORIGIN;
-    add_header          X-XSS-Protection "1; mode=block";
-    add_header          "Access-Control-Allow-Origin" "*";
-    add_header          "Access-Control-Allow-Headers" "*,X-LIVEAGENT-API-VERSION,X-LIVEAGENT-AFFINITY,X-LIVEAGENT-SESSION-KEY,X-LIVEAGENT-SEQUENCE,liveagentaddress";
 
 	location / {
         if ($request_method = "OPTIONS") {
