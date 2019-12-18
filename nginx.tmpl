@@ -141,6 +141,12 @@ proxy_set_header X-Forwarded-Port $proxy_x_forwarded_port;
 proxy_set_header Proxy "";
 {{ end }}
 
+add_header          X-Content-Type-Options nosniff;
+add_header          X-Frame-Options SAMEORIGIN;
+add_header          X-XSS-Protection "1; mode=block";
+add_header          "Access-Control-Allow-Origin" "*";
+add_header          "Access-Control-Allow-Headers" "X-LIVEAGENT-API-VERSION,X-LIVEAGENT-AFFINITY,X-LIVEAGENT-SESSION-KEY,X-LIVEAGENT-SEQUENCE,liveagentaddress";
+
 {{ $enable_ipv6 := eq (or ($.Env.ENABLE_IPV6) "") "true" }}
 server {
 	server_name _; # This is just an invalid value which will never trigger on a real hostname.
@@ -277,12 +283,6 @@ server {
 	{{ end }}
 	access_log /var/log/nginx/access.log vhost;
 
-    add_header          X-Content-Type-Options nosniff;
-    add_header          X-Frame-Options SAMEORIGIN;
-    add_header          X-XSS-Protection "1; mode=block";
-    add_header          "Access-Control-Allow-Origin" "*";
-    add_header          "Access-Control-Allow-Headers" "*,X-LIVEAGENT-API-VERSION,X-LIVEAGENT-AFFINITY,X-LIVEAGENT-SESSION-KEY,X-LIVEAGENT-SEQUENCE,liveagentaddress";
-
 	location / {
         if ($request_method = "OPTIONS") {
             return 204;
@@ -334,13 +334,6 @@ server {
 	include /etc/nginx/vhost.d/default;
 	{{ end }}
 
-
-    add_header          X-Content-Type-Options nosniff;
-    add_header          X-Frame-Options SAMEORIGIN;
-    add_header          X-XSS-Protection "1; mode=block";
-    add_header          "Access-Control-Allow-Origin" "*";
-    add_header          "Access-Control-Allow-Headers" "*,X-LIVEAGENT-API-VERSION,X-LIVEAGENT-AFFINITY,X-LIVEAGENT-SESSION-KEY,X-LIVEAGENT-SEQUENCE,liveagentaddress";
-
 	location / {
         if ($request_method = "OPTIONS") {
             return 204;
@@ -372,12 +365,6 @@ server {
 	include /etc/nginx/vhost.d/default;
 	{{ end }}
 
-    add_header          X-Content-Type-Options nosniff;
-    add_header          X-Frame-Options SAMEORIGIN;
-    add_header          X-XSS-Protection "1; mode=block";
-    add_header          "Access-Control-Allow-Origin" "*";
-    add_header          "Access-Control-Allow-Headers" "*,X-LIVEAGENT-API-VERSION,X-LIVEAGENT-AFFINITY,X-LIVEAGENT-SESSION-KEY,X-LIVEAGENT-SEQUENCE,liveagentaddress";
-
 	location / {
         if ($request_method = "OPTIONS") {
             return 204;
@@ -397,12 +384,6 @@ server {
 
 	ssl_certificate /etc/nginx/certs/default.crt;
 	ssl_certificate_key /etc/nginx/certs/default.key;
-
-    add_header          X-Content-Type-Options nosniff;
-    add_header          X-Frame-Options SAMEORIGIN;
-    add_header          X-XSS-Protection "1; mode=block";
-    add_header          "Access-Control-Allow-Origin" "*";
-    add_header          "Access-Control-Allow-Headers" "*,X-LIVEAGENT-API-VERSION,X-LIVEAGENT-AFFINITY,X-LIVEAGENT-SESSION-KEY,X-LIVEAGENT-SEQUENCE,liveagentaddress";
 
 	location / {
         if ($request_method = "OPTIONS") {
