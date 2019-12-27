@@ -159,6 +159,7 @@ server {
 
     proxy_hide_header   Access-Control-Allow-Headers;
     add_header          "Access-Control-Allow-Headers" "X-LIVEAGENT-API-VERSION,X-LIVEAGENT-AFFINITY,X-LIVEAGENT-SESSION-KEY,X-LIVEAGENT-SEQUENCE,liveagentaddress" always;
+    add_header          "liveagentaddress" "";
 
 	location / {
         if ($request_method = "OPTIONS") {
@@ -192,6 +193,7 @@ server {
 
     proxy_hide_header   Access-Control-Allow-Headers;
     add_header          "Access-Control-Allow-Headers" "X-LIVEAGENT-API-VERSION,X-LIVEAGENT-AFFINITY,X-LIVEAGENT-SESSION-KEY,X-LIVEAGENT-SEQUENCE,liveagentaddress" always;
+    add_header          "liveagentaddress" "";
 
 	location / {
         if ($request_method = "OPTIONS") {
@@ -295,6 +297,7 @@ server {
 
     proxy_hide_header   Access-Control-Allow-Headers;
     add_header          "Access-Control-Allow-Headers" "X-LIVEAGENT-API-VERSION,X-LIVEAGENT-AFFINITY,X-LIVEAGENT-SESSION-KEY,X-LIVEAGENT-SEQUENCE,liveagentaddress" always;
+    add_header          "liveagentaddress" "";
 
 	location / {
         if ($request_method = "OPTIONS") {
@@ -356,6 +359,7 @@ server {
 
     proxy_hide_header   Access-Control-Allow-Headers;
     add_header          "Access-Control-Allow-Headers" "X-LIVEAGENT-API-VERSION,X-LIVEAGENT-AFFINITY,X-LIVEAGENT-SESSION-KEY,X-LIVEAGENT-SEQUENCE,liveagentaddress" always;
+    add_header          "liveagentaddress" "";
 
 	location / {
         if ($request_method = "OPTIONS") {
@@ -397,6 +401,7 @@ server {
 
     proxy_hide_header   Access-Control-Allow-Headers;
     add_header          "Access-Control-Allow-Headers" "X-LIVEAGENT-API-VERSION,X-LIVEAGENT-AFFINITY,X-LIVEAGENT-SESSION-KEY,X-LIVEAGENT-SEQUENCE,liveagentaddress" always;
+    add_header          "liveagentaddress" "";
 
 	location / {
         if ($request_method = "OPTIONS") {
@@ -427,6 +432,7 @@ server {
 
     proxy_hide_header   Access-Control-Allow-Headers;
     add_header          "Access-Control-Allow-Headers" "X-LIVEAGENT-API-VERSION,X-LIVEAGENT-AFFINITY,X-LIVEAGENT-SESSION-KEY,X-LIVEAGENT-SEQUENCE,liveagentaddress" always;
+    add_header          "liveagentaddress" "";
 
 	location / {
         if ($request_method = "OPTIONS") {
