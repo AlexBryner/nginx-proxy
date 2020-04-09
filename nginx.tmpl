@@ -132,8 +132,7 @@ proxy_set_header Host $http_host;
 proxy_set_header Upgrade $http_upgrade;
 proxy_set_header Connection $proxy_connection;
 proxy_set_header X-Real-IP $remote_addr;
-proxy_set_header X-Forwarded-For $remote_addr;
-proxy_set_header X-Forwarded-Host $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 proxy_set_header X-Forwarded-Proto $proxy_x_forwarded_proto;
 proxy_set_header X-Forwarded-Ssl $proxy_x_forwarded_ssl;
 proxy_set_header X-Forwarded-Port $proxy_x_forwarded_port;
@@ -154,6 +153,7 @@ server {
     add_header          X-Content-Type-Options nosniff;
     add_header          X-Frame-Options SAMEORIGIN;
     add_header          X-XSS-Protection "1; mode=block";
+    add_header          Strict-Transport-Security: max-age=31536000;
 
     proxy_hide_header   Access-Control-Allow-Origin;
     add_header          "Access-Control-Allow-Origin" "*"  always;
@@ -188,6 +188,7 @@ server {
     add_header          X-Content-Type-Options nosniff;
     add_header          X-Frame-Options SAMEORIGIN;
     add_header          X-XSS-Protection "1; mode=block";
+    add_header          Strict-Transport-Security: max-age=31536000;
 
     proxy_hide_header   Access-Control-Allow-Origin;
     add_header          "Access-Control-Allow-Origin" "*"  always;
@@ -195,10 +196,6 @@ server {
     proxy_hide_header   Access-Control-Allow-Headers;
     add_header          "Access-Control-Allow-Headers" "X-LIVEAGENT-API-VERSION,X-LIVEAGENT-AFFINITY,X-LIVEAGENT-SESSION-KEY,X-LIVEAGENT-SEQUENCE,liveagentaddress" always;
     add_header          "liveagentaddress" "";
-
-    set_real_ip_from 10.0.0.0/8;
-    real_ip_header X-Real-IP;
-    real_ip_recursive on;
 
 	location / {
         if ($request_method = "OPTIONS") {
@@ -296,6 +293,7 @@ server {
     add_header          X-Content-Type-Options nosniff;
     add_header          X-Frame-Options SAMEORIGIN;
     add_header          X-XSS-Protection "1; mode=block";
+    add_header          Strict-Transport-Security: max-age=31536000;
 
     proxy_hide_header   Access-Control-Allow-Origin;
     add_header          "Access-Control-Allow-Origin" "*"  always;
@@ -345,10 +343,6 @@ server {
 	ssl_trusted_certificate {{ printf "/etc/nginx/certs/%s.chain.pem" $cert }};
 	{{ end }}
 
-	{{ if (not (or (eq $https_method "noredirect") (eq $hsts "off"))) }}
-	add_header Strict-Transport-Security "{{ trim $hsts }}" always;
-	{{ end }}
-
 	{{ if (exists (printf "/etc/nginx/vhost.d/%s" $host)) }}
 	include {{ printf "/etc/nginx/vhost.d/%s" $host }};
 	{{ else if (exists "/etc/nginx/vhost.d/default") }}
@@ -358,6 +352,7 @@ server {
     add_header          X-Content-Type-Options nosniff;
     add_header          X-Frame-Options SAMEORIGIN;
     add_header          X-XSS-Protection "1; mode=block";
+    add_header          Strict-Transport-Security: max-age=31536000;
 
     proxy_hide_header   Access-Control-Allow-Origin;
     add_header          "Access-Control-Allow-Origin" "*"  always;
@@ -400,6 +395,7 @@ server {
     add_header          X-Content-Type-Options nosniff;
     add_header          X-Frame-Options SAMEORIGIN;
     add_header          X-XSS-Protection "1; mode=block";
+    add_header          Strict-Transport-Security: max-age=31536000;
 
     proxy_hide_header   Access-Control-Allow-Origin;
     add_header          "Access-Control-Allow-Origin" "*"  always;
@@ -431,6 +427,7 @@ server {
     add_header          X-Content-Type-Options nosniff;
     add_header          X-Frame-Options SAMEORIGIN;
     add_header          X-XSS-Protection "1; mode=block";
+    add_header          Strict-Transport-Security: max-age=31536000;
 
     proxy_hide_header   Access-Control-Allow-Origin;
     add_header          "Access-Control-Allow-Origin" "*"  always;
